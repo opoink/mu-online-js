@@ -9,13 +9,16 @@ import serverListResponse from './handlers/serverListResponse';
 import logger from './logger';
 import {env} from 'node:process';
 import {PacketHandlersTcp, SendData} from './types';
+import path from 'path';
+
+const ROOT = path.dirname(path.dirname(path.dirname(__dirname)));
 
 const serverOptions = {
-  key: fs.readFileSync('./../ssl/key.pem'),
-  cert: fs.readFileSync('./../ssl/cert.pem'),
+  key: fs.readFileSync(ROOT + '/ssl/key.pem'),
+  cert: fs.readFileSync(ROOT + '/ssl/cert.pem'),
   rejectUnauthorized: true,
   requestCert: false,
-  ca: [fs.readFileSync('./../ssl/cert.pem')],
+  ca: [fs.readFileSync(ROOT + '/ssl/cert.pem')],
 };
 
 let tcpServer: Server;
